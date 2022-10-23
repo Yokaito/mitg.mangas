@@ -14,7 +14,18 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "next",
+    "pscale-connect": "pscale connect mangas initial-setup --port 3309",
+    "sqlite-migrate": "npx prisma migrate dev --name init --schema=./prisma/_sqlite/schema.prisma",
+    "sqlite-generate": "prisma generate --schema=./prisma/_sqlite/schema.prisma",
+    "sqlite-studio": "prisma studio --schema=./prisma/_sqlite/schema.prisma",
+    "dx:next": "yarn sqlite-migrate && yarn sqlite-generate && next dev",
+    "dx:prisma-studio": "yarn sqlite-studio",
+    "migrate-dev": "prisma migrate dev",
+    "migrate-reset": "prisma migrate reset",
+    "migrate": "prisma migrate deploy",
+    "studio": "prisma studio",
+    "pscale-push": "prisma db push",
+    "dev": "yarn dx:next",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
@@ -34,6 +45,7 @@
     ]
   },
   "dependencies": {
+    "@prisma/client": "^4.5.0",
     "@tanstack/react-query": "^4.13.0",
     "@trpc/client": "^10.0.0-proxy-beta.25",
     "@trpc/next": "^10.0.0-proxy-beta.25",
@@ -65,6 +77,7 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "prisma": "^4.5.0",
     "stylelint": "^14.14.0",
     "stylelint-config-recommended": "^9.0.0",
     "stylelint-config-standard-scss": "^5.0.0",

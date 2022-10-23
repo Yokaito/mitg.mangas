@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model Series {
+  id             String           @id @default(uuid())
+  title          String
+  author         String
+  artist         String
+  summary        String
+  cover          String
+  typeSeriesId   String
+  type           TypeSeries       @relation(fields: [typeSeriesId], references: [id])
+  createdAt      DateTime         @unique @default(now())
+  updatedAt      DateTime         @unique @default(now())
+  GenresOnSeries GenresOnSeries[]
+}
+
+model TypeSeries {
+  id        String   @id @default(uuid())
+  type      String   @unique
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
+  Series    Series[]
+}
+
+model Genre {
+  id             String           @id @default(uuid())
+  genre          String           @unique
+  createdAt      DateTime         @unique @default(now())
+  updatedAt      DateTime         @unique @default(now())
+  GenresOnSeries GenresOnSeries[]
+}
+
+model GenresOnSeries {
+  series    Series   @relation(fields: [seriesId], references: [id])
+  seriesId  String
+  genre     Genre    @relation(fields: [genreId], references: [id])
+  genreId   String
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
+
+  @@id([seriesId, genreId])
+}
