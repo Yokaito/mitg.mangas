@@ -1,12 +1,11 @@
-import { z } from 'zod'
+import * as yup from 'yup'
 import { publicProcedure, router } from '../trpc'
 
 export const appRouter = router({
   hello: publicProcedure
     .input(
-      z.object({
-        text: z.string().nullish(),
-        name: z.string(),
+      yup.object({
+        text: yup.string().required(),
       })
     )
     .query(({ input }) => {
