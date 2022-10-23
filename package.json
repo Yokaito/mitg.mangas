@@ -20,6 +20,7 @@
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "stylelint": "stylelint \"**/styles.ts\"",
     "postinstall": "husky install",
     "commit": "cz"
   },
@@ -27,6 +28,9 @@
     "./src/**/*.{ts,js,jsx,tsx}": [
       "yarn lint --fix",
       "yarn format"
+    ],
+    "styles.ts": [
+      "stylelint"
     ]
   },
   "dependencies": {
@@ -53,7 +57,13 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "stylelint": "^14.9.1",
+    "stylelint-config-recommended": "^8.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "@stylelint/postcss-css-in-js": "^0.38.0"
   },
   "config": {
     "commitizen": {
