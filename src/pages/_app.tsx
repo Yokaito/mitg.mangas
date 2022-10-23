@@ -1,7 +1,7 @@
-import { AppProps } from 'next/app'
+import type { AppType } from 'next/app'
+import { trpc } from '@/sdk/utils/trpc'
 
-export const MyApp = ({ Component, pageProps, router }: AppProps) => {
+const MyApp: AppType = ({ Component, pageProps, router }) => {
   return <Component {...pageProps} key={router.route} />
 }
-
-export default MyApp
+export default trpc.withTRPC(MyApp)
