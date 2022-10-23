@@ -1,5 +1,9 @@
+import { trpc } from '@/sdk/utils/trpc'
+
 export const Home = () => {
-  return <>Guilherme</>
+  const { data } = trpc.hello.greetings.useQuery({ name: 'World' })
+
+  return <>{JSON.stringify(data)}</>
 }
 
 export default Home

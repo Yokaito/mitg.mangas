@@ -1,6 +1,8 @@
 import { httpBatchLink } from '@trpc/client'
 import { createTRPCNext } from '@trpc/next'
 import type { AppRouter } from '../server/routers/_app'
+import superjson from 'superjson'
+
 function getBaseUrl() {
   if (typeof window !== 'undefined')
     // browser should use relative path
@@ -14,6 +16,7 @@ function getBaseUrl() {
   // assume localhost
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
+
 export const trpc = createTRPCNext<AppRouter>({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   config({ ctx }) {
@@ -27,6 +30,7 @@ export const trpc = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      transformer: superjson,
       /**
        * @link https://tanstack.com/query/v4/docs/reference/QueryClient
        **/
