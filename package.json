@@ -1,0 +1,61 @@
+{
+  "name": "mitg.manga",
+  "description": "Only a manga site",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Guilherme Fontes <gui.fontes.amorim@gmail.com> (@guifontes)",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "manga",
+    "typescript"
+  ],
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc",
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "postinstall": "husky install",
+    "commit": "cz"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,js,jsx,tsx}": [
+      "yarn lint --fix",
+      "yarn format"
+    ]
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/node": "^18.11.3",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.26.0",
+    "eslint-config-next": "^12.3.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "7.31.10",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
