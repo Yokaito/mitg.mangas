@@ -1,3 +1,4 @@
+import '../styles/fonts.css'
 import type { AppType } from 'next/app'
 import { trpc } from '@/sdk/utils/trpc'
 import GlobalStyle from '@/styles/resets/createGlobalStyle'
