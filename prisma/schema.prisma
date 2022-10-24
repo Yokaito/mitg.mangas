@@ -4,6 +4,7 @@
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
@@ -12,43 +13,76 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
+enum Status {
+  ONGOING
+  COMPLETED
+}
+
 model Series {
   id             String           @id @default(uuid())
   title          String
-  author         String
-  artist         String
   summary        String
   cover          String
-  typeSeriesId   String
-  type           TypeSeries       @relation(fields: [typeSeriesId], references: [id])
+  status         Status           @default(ONGOING)
+  isVisible      Boolean          @default(true)
+  views          Int              @default(0)
+  launched       DateTime
   createdAt      DateTime         @unique @default(now())
   updatedAt      DateTime         @unique @default(now())
-  GenresOnSeries GenresOnSeries[]
+  AuthorOnSeries AuthorOnSeries[]
+  ArtistOnSeries ArtistOnSeries[]
+  type           SeriesType       @relation(fields: [seriesTypeId], references: [id])
+  seriesTypeId   String
 }
 
-model TypeSeries {
+model SeriesType {
   id        String   @id @default(uuid())
-  type      String   @unique
+  name      String   @unique
   createdAt DateTime @unique @default(now())
   updatedAt DateTime @unique @default(now())
   Series    Series[]
 }
 
-model Genre {
+model Artist {
   id             String           @id @default(uuid())
-  genre          String           @unique
+  name           String
   createdAt      DateTime         @unique @default(now())
   updatedAt      DateTime         @unique @default(now())
-  GenresOnSeries GenresOnSeries[]
+  ArtistOnSeries ArtistOnSeries[]
 }
 
-model GenresOnSeries {
-  series    Series   @relation(fields: [seriesId], references: [id])
+model Author {
+  id             String           @id @default(uuid())
+  name           String
+  createdAt      DateTime         @unique @default(now())
+  updatedAt      DateTime         @unique @default(now())
+  AuthorOnSeries AuthorOnSeries[]
+}
+
+model ArtistOnSeries {
+  id        String   @id @default(uuid())
+  artistId  String
   seriesId  String
-  genre     Genre    @relation(fields: [genreId], references: [id])
-  genreId   String
   createdAt DateTime @unique @default(now())
   updatedAt DateTime @unique @default(now())
 
-  @@id([seriesId, genreId])
+  Artist Artist @relation(fields: [artistId], references: [id])
+  Series Series @relation(fields: [seriesId], references: [id])
+
+  @@index([artistId, seriesId])
+  @@index([seriesId, artistId])
+}
+
+model AuthorOnSeries {
+  id        String   @id @default(uuid())
+  authorId  String
+  seriesId  String
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
+
+  author Author @relation(fields: [authorId], references: [id])
+  series Series @relation(fields: [seriesId], references: [id])
+
+  @@index([authorId, seriesId])
+  @@index([seriesId, authorId])
 }

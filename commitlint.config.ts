@@ -16,6 +16,7 @@ const Configuration: UserConfig = {
         `test`,
         `chore`,
         `revert`,
+        `database`,
       ],
     ],
   },
