@@ -11,7 +11,7 @@
     "typescript"
   ],
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "scripts": {
     "pscale-connect": "pscale connect mangas initial-setup --port 3309",
