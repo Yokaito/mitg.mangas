@@ -18,7 +18,7 @@
     "sqlite-migrate": "npx prisma migrate dev --name init --schema=./prisma/_sqlite/schema.prisma",
     "sqlite-generate": "prisma generate --schema=./prisma/_sqlite/schema.prisma",
     "sqlite-studio": "prisma studio --schema=./prisma/_sqlite/schema.prisma",
-    "dx:next": "yarn sqlite-migrate && yarn sqlite-generate && next dev",
+    "dx:next": "yarn migrate-dev && prisma generate && next dev",
     "dx:prisma-studio": "yarn sqlite-studio",
     "migrate-dev": "prisma migrate dev",
     "migrate-reset": "prisma migrate reset",
