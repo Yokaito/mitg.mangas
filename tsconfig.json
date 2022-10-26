@@ -18,7 +18,8 @@
       "@/*": ["./src/*"],
       "@/public/*": ["./public/*"],
       "@/sdk/*": ["./src/sdk/*"],
-      "@/styles/*": ["./src/styles/*"]
+      "@/styles/*": ["./src/styles/*"],
+      "@/env/*": ["./src/sdk/environment/*"]
     },
     "incremental": true
   },
