@@ -1,4 +1,5 @@
 import { trpc } from '@/sdk/utils/trpc'
+import Image from 'next/image'
 import { toast } from 'react-toastify'
 
 export const Home = () => {
@@ -9,6 +10,14 @@ export const Home = () => {
     <>
       {JSON.stringify(data)}
       <button onClick={notify}>Toast</button>
+      <Image
+        src="https://mitg-mangas.s3.sa-east-1.amazonaws.com/icon-512.png"
+        blurDataURL="https://mitg-mangas.s3.sa-east-1.amazonaws.com/icon-512.png"
+        alt="test"
+        placeholder="blur"
+        height={512}
+        width={512}
+      ></Image>
     </>
   )
 }

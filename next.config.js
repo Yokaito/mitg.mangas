@@ -10,6 +10,9 @@ const nextConfig = {
   experimental: {
     adjustFontFallbacks: true,
   },
+  images: {
+    domains: ['mitg-mangas.s3.sa-east-1.amazonaws.com'],
+  },
   compiler: {
     styledComponents: {
       displayName: true,
