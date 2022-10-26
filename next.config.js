@@ -11,7 +11,10 @@ const nextConfig = {
     adjustFontFallbacks: true,
   },
   compiler: {
-    styledComponents: true,
+    styledComponents: {
+      displayName: true,
+      namespace: 'mitg',
+    },
   },
 }
 
