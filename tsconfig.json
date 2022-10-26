@@ -19,7 +19,8 @@
       "@/public/*": ["./public/*"],
       "@/sdk/*": ["./src/sdk/*"],
       "@/styles/*": ["./src/styles/*"],
-      "@/env/*": ["./src/sdk/environment/*"]
+      "@/env/*": ["./src/sdk/environment/index.ts"],
+      "@/ui/*": ["./src/ui/*"]
     },
     "incremental": true
   },
