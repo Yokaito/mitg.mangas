@@ -1,7 +1,7 @@
 import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
-import { prisma } from '@/sdk/utils/prisma'
-import { s3 } from '@/sdk/utils/aws3'
+import { prisma } from '@/sdk/lib/prisma'
+import { s3 } from '@/sdk/lib/aws3'
 import { env } from '@/sdk/environment'
 
 // create context based of incoming request

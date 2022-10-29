@@ -1,4 +1,4 @@
-import { trpc } from '@/sdk/utils/trpc'
+import { trpc } from '@/sdk/lib/trpc'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 

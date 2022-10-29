@@ -1,7 +1,7 @@
 import '../styles/fonts.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import type { AppType } from 'next/app'
-import { trpc } from '@/sdk/utils/trpc'
+import { trpc } from '@/sdk/lib/trpc'
 import GlobalStyle from '@/styles/resets/createGlobalStyle'
 import theme from '@/styles/theme/theme'
 import { ThemeProvider } from 'styled-components'
