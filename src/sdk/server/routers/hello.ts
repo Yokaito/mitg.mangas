@@ -2,7 +2,6 @@ import { publicProcedure, router } from '../trpc'
 import * as Yup from 'yup'
 import { base64ToBuffer } from '@/sdk/utils/buffer'
 import { constructObjectToS3 } from '@/sdk/lib/aws3'
-import { toAvif } from '@/sdk/utils/optimizeImage'
 
 export const helloRouter = router({
   greetings: publicProcedure
@@ -45,28 +44,6 @@ export const helloRouter = router({
           contentType: `image/${type}`,
           key: `test.${type}`,
           publicToRead: true,
-        })
-      )
-
-      return data
-    }),
-
-  saveText: publicProcedure
-    .input(
-      Yup.object({
-        text: Yup.string().required(),
-      })
-    )
-    .mutation(async ({ input: { text }, ctx }) => {
-      const { s3 } = ctx
-
-      const data = await s3.client.send(
-        constructObjectToS3({
-          body: text,
-          contentType: 'text/plain',
-          key: `${text}.txt`,
-          publicToRead: true,
-          contentEncoding: 'utf-8',
         })
       )
 
