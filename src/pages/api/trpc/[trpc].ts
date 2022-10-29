@@ -2,7 +2,14 @@ import * as trpcNext from '@trpc/server/adapters/next'
 import { appRouter } from '@/sdk/server/routers/_app'
 import { createContext } from '@/sdk/server/context'
 
-// export API handler
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '5mb',
+    },
+  },
+}
+
 export default trpcNext.createNextApiHandler({
   router: appRouter,
   createContext,

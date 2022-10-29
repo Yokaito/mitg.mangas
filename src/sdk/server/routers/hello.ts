@@ -2,7 +2,6 @@ import { publicProcedure, router } from '../trpc'
 import * as Yup from 'yup'
 import { base64ToBuffer } from '@/sdk/utils/buffer'
 import { constructObjectToS3 } from '@/sdk/lib/aws3'
-import { toAvif } from '@/sdk/utils/optimizeImage'
 
 export const helloRouter = router({
   greetings: publicProcedure
