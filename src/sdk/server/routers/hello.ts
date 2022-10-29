@@ -34,15 +34,16 @@ export const helloRouter = router({
     )
     .mutation(async ({ input: { base64 }, ctx }) => {
       const { s3 } = ctx
+      // get type from base64
+      const type = base64.split(';')[0].split('/')[1]
       const bufferImage = base64ToBuffer(base64)
-      const bufferAvif = await toAvif(bufferImage)
 
       const data = await s3.client.send(
         constructObjectToS3({
-          body: bufferAvif,
-          contentEncoding: 'avif',
-          contentType: 'image/avif',
-          key: 'test.avif',
+          body: bufferImage,
+          contentEncoding: 'type',
+          contentType: `image/${type}`,
+          key: `test.${type}`,
           publicToRead: true,
         })
       )
