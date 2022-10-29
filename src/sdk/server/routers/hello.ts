@@ -2,6 +2,7 @@ import { publicProcedure, router } from '../trpc'
 import * as Yup from 'yup'
 import { base64ToBuffer } from '@/sdk/utils/buffer'
 import { constructObjectToS3 } from '@/sdk/lib/aws3'
+import { toAvif } from '@/sdk/utils/optimizeImage'
 
 export const helloRouter = router({
   greetings: publicProcedure
@@ -36,10 +37,11 @@ export const helloRouter = router({
       // get type from base64
       const type = base64.split(';')[0].split('/')[1]
       const bufferImage = base64ToBuffer(base64)
+      const sharpedImage = await toAvif(bufferImage)
 
       const data = await s3.client.send(
         constructObjectToS3({
-          body: bufferImage,
+          body: sharpedImage,
           contentEncoding: 'type',
           contentType: `image/${type}`,
           key: `test.${type}`,
