@@ -37,11 +37,10 @@ export const helloRouter = router({
       // get type from base64
       const type = base64.split(';')[0].split('/')[1]
       const bufferImage = base64ToBuffer(base64)
-      const sharpedImage = await toAvif(bufferImage)
 
       const data = await s3.client.send(
         constructObjectToS3({
-          body: sharpedImage,
+          body: bufferImage,
           contentEncoding: 'type',
           contentType: `image/${type}`,
           key: `test.${type}`,
