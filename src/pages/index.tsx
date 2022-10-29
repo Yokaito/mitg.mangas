@@ -1,23 +1,19 @@
+import { Card } from '@/components/Series'
 import { trpc } from '@/sdk/lib/trpc'
-import Image from 'next/image'
+import Head from 'next/head'
 import { toast } from 'react-toastify'
 
 export const Home = () => {
   const { data } = trpc.hello.greetings.useQuery({ name: 'World' })
-  const notify = () => toast.info('Wow so easy !')
+  const notify = () => toast.info(JSON.stringify(data))
 
   return (
     <>
-      {JSON.stringify(data)}
+      <Head>
+        <title>MITG | Mangas</title>
+      </Head>
       <button onClick={notify}>Toast</button>
-      <Image
-        src="https://mitg-mangas.s3.sa-east-1.amazonaws.com/icon-512.png"
-        blurDataURL="https://mitg-mangas.s3.sa-east-1.amazonaws.com/icon-512.png"
-        alt="test"
-        placeholder="blur"
-        height={512}
-        width={512}
-      ></Image>
+      <Card />
     </>
   )
 }

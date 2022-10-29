@@ -5,7 +5,7 @@
  **/
 const nextConfig = {
   /* config options here */
-  reactStrictMode: false,
+  reactStrictMode: true,
   optimizeFonts: true,
   experimental: {
     adjustFontFallbacks: true,
