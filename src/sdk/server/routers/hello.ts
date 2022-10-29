@@ -49,4 +49,26 @@ export const helloRouter = router({
 
       return data
     }),
+
+  saveText: publicProcedure
+    .input(
+      Yup.object({
+        text: Yup.string().required(),
+      })
+    )
+    .mutation(async ({ input: { text }, ctx }) => {
+      const { s3 } = ctx
+
+      const data = await s3.client.send(
+        constructObjectToS3({
+          body: text,
+          contentType: 'text/plain',
+          key: `${text}.txt`,
+          publicToRead: true,
+          contentEncoding: 'utf-8',
+        })
+      )
+
+      return data
+    }),
 })

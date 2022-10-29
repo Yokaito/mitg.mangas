@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 
 export const Form = () => {
   const mutation = trpc.hello.sendFile.useMutation()
+  const mutationText = trpc.hello.saveText.useMutation()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (event: any) => {
@@ -14,6 +15,11 @@ export const Form = () => {
     mutation.mutate({ base64: file64.body })
   }
 
+  const handleSubmitText = async (event: any) => {
+    event.preventDefault()
+    mutationText.mutate({ text: event.target.text.value })
+  }
+
   useEffect(() => {
     if (!mutation.isSuccess) return
 
@@ -21,10 +27,17 @@ export const Form = () => {
   }, [mutation])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input id="file" name="file" type="file" />
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input id="file" name="file" type="file" />
+        <button type="submit">Submit</button>
+      </form>
+
+      <form onSubmit={handleSubmitText}>
+        <input id="text" name="text" type="text" />
+        <button type="submit">Submit</button>
+      </form>
+    </>
   )
 }
 

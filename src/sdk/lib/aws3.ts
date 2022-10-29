@@ -16,7 +16,7 @@ export const s3: S3Client =
 type PutObjectToS3 = {
   publicToRead: boolean
   key: string
-  body: Buffer
+  body: Buffer | string
   contentEncoding: string
   contentType: string
 }
